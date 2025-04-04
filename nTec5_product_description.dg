@@ -1,11 +1,5 @@
-/**************************************************************
- * NTec-5
- * 
- * NTec is a modular, AI-driven auto tuning system designed 
- * for advanced engine calibration and dynamic automotive 
- * performance management. This document provides a technical 
- * overview of both the back-end and front-end components.
- **************************************************************/
+### NTec is a modular, AI-driven auto tuning system designed for advanced engine calibration and dynamic automotive performance management. This document provides a technical overview of both the back-end and front-end components.
+
 
 /**************************************************************
  * Section 1: NTec Back-End
