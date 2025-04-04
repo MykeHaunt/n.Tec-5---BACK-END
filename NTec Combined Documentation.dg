@@ -1,0 +1,131 @@
+/**************************************************************
+ * NTec Combined Documentation (.dg)
+ * 
+ * NTec is a modular, AI-driven auto tuning system designed 
+ * for advanced engine calibration and dynamic automotive 
+ * performance management. This document provides a technical 
+ * overview of both the back-end and front-end components.
+ **************************************************************/
+
+/**************************************************************
+ * Section 1: NTec Back-End
+ **************************************************************/
+
+/*
+Overview:
+NTec Back-End is a modular, AI-driven auto tuning system that 
+integrates advanced calibration techniques with real-time sensor 
+feedback. It manages engine calibration maps and applies dynamic 
+tuning adjustments based on sensor inputs and AI-based gradient 
+optimization. 
+
+Key Functionalities:
+1. Base Map Loading:
+   - Manages engine calibration maps by parsing and loading 
+     predefined engine data into memory.
+   - Serves as the baseline configuration for further tuning operations.
+
+2. Gradient Tuning:
+   - Uses AI recommendations (likely employing gradient descent 
+     or similar optimization algorithms) to gradually adjust 
+     calibration parameters.
+   - Adapts the engine’s performance parameters continuously based 
+     on real-time sensor feedback.
+
+3. Detuning on Part Degradation:
+   - Implements safety protocols by reducing tuning parameters when 
+     sensor data indicates mechanical degradation.
+   - Ensures long-term reliability by preventing engine damage under 
+     degraded conditions.
+
+4. Active Aerodynamic Control:
+   - Manages aerodynamic components (e.g., Drag Reduction System (DRS) 
+     and braking stability) using live sensor data.
+   - Optimizes performance during dynamic, high-speed maneuvers.
+
+5. Active Lambda Control:
+   - Continuously adjusts the lambda target to maintain an optimal 
+     air–fuel ratio.
+   - Ensures stoichiometric combustion, crucial for performance and 
+     emissions control.
+
+System Architecture:
+- Modular Design: Each component operates independently and is 
+  configurable via YAML files (e.g., configs/base_map.yaml, 
+  configs/tuning_config.yaml).
+- Real-Time Sensor Feedback: Processes sensor data continuously to 
+  ensure immediate tuning adjustments.
+- AI Integration: Incorporates machine learning techniques for 
+  predictive tuning, enhancing engine performance under dynamic 
+  conditions.
+- Safety and Reliability: Integrates detuning mechanisms to adapt 
+  to part degradation, emphasizing operational longevity.
+
+Setup and Deployment:
+1. Clone the repository.
+2. Install dependencies:
+       pip install -r requirements.txt
+3. Configure the system via YAML files.
+4. Launch the system:
+       python -m src.main
+
+
+/**************************************************************
+ * Section 2: NTec Web (Front-End)
+ **************************************************************/
+
+/*
+Overview:
+NTec Web is the interactive front-end interface for the NTec auto 
+tuning system. It provides a user-friendly, web-based interface that 
+integrates live sensor data, advanced AI decision-making, and real-time 
+controls, enabling both automated and manual tuning adjustments.
+
+Key Features:
+1. Real Sensor Integration:
+   - Retrieves live sensor data from a CAN bus (or simulates data 
+     when hardware is unavailable).
+   - Ensures that tuning adjustments reflect the actual engine state.
+
+2. Advanced AI Decision-Making:
+   - Employs a TensorFlow model to predict optimal tuning adjustments 
+     based on sensor inputs.
+   - Supports both automatic tuning recommendations and manual overrides.
+
+3. Interactive Front-End Controls:
+   - Built with HTML, CSS, and JavaScript to provide dynamic dashboards, 
+     real-time charts, and control panels.
+   - Allows operators to monitor live data, adjust parameters, and 
+     oversee system operations.
+
+4. Calibration Map Persistence:
+   - Uses YAML files to store and retrieve calibration maps, ensuring that 
+     tuning parameters persist across sessions.
+   - Facilitates easy configuration and iterative testing without modifying 
+     core code.
+
+5. Deployment and Quick Start:
+   - Provides an automation script (quick_start.sh) to streamline setup, 
+     dependency installation, and application launch.
+
+System Architecture:
+- Modular and Extendable: The front-end is developed as an independent 
+  module, facilitating parallel updates and future enhancements.
+- Real-Time Data Pipeline: Sensor data flows continuously into the AI 
+  model, and adjustments are reflected in the UI in real time.
+- AI and Machine Learning Integration: Leverages TensorFlow for data-driven 
+  decision-making, enhancing responsiveness under variable conditions.
+- User-Centric Design: Combines automated tuning with manual control, 
+  offering flexibility and oversight in high-performance environments.
+- Technology Stack: Utilizes Python for back-end processing and AI integration, 
+  alongside standard web technologies (HTML, JavaScript, CSS) for the front-end.
+
+Quick Start Instructions:
+1. Run the quick start script:
+       ./quick_start.sh
+2. The interface launches, providing live updates and interactive control 
+   over the tuning process.
+
+**************************************************************
+ * End of NTec Combined Documentation
+ **************************************************************/
