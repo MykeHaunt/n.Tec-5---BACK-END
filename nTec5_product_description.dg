@@ -1,6 +1,3 @@
-### NTec is a modular, AI-driven auto tuning system designed for advanced engine calibration and dynamic automotive performance management. This document provides a technical overview of both the back-end and front-end components.
-
-
 /**************************************************************
  * Section 1: NTec Back-End
  **************************************************************/
@@ -118,8 +115,4 @@ Quick Start Instructions:
 1. Run the quick start script:
        ./quick_start.sh
 2. The interface launches, providing live updates and interactive control 
-   over the tuning process.
-
-**************************************************************
-ENJOY 🏎️
- **************************************************************/
+   over the tuning process
