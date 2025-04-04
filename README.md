@@ -1,3 +1,4 @@
+![8051C332-E21F-4F94-A04E-0FD21D487EDC](https://github.com/user-attachments/assets/d4c8db3e-87d3-4155-807d-dfbd5f0b01af)
 # NTec
 
 NTec is a modular, AI-driven auto tuning system that combines advanced calibration techniques with real-time sensor feedback. It integrates features from traditional auto tuning systems (inspired by MoTeC) with AI-based gradient tuning, detuning on part degradation, active aero controls (DRS and braking stability), and an active lambda controller for maintaining the optimal air–fuel ratio.
