@@ -1,0 +1,5 @@
+gradient_step: 0.01
+detune_gradient_step: 0.01
+lambda_target: 1.0
+lambda_adjustment_step: 0.01
+tolerance: 0.05
