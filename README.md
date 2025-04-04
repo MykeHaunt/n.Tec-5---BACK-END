@@ -1,11 +1,19 @@
-# NTec Web Interface with Real Sensor Integration and Advanced AI Decision-Making
+# NTec
 
-NTec is an AI-driven auto tuning system that integrates real sensor data (via CAN bus), advanced AI for dynamic adjustment decisions, and an interactive web front end.
+NTec is a modular, AI-driven auto tuning system that combines advanced calibration techniques with real-time sensor feedback. It integrates features from traditional auto tuning systems (inspired by MoTeC) with AI-based gradient tuning, detuning on part degradation, active aero controls (DRS and braking stability), and an active lambda controller for maintaining the optimal air–fuel ratio.
 
 ## Features
 
-- **Real Sensor Integration:** Uses the `python-can` library to read sensor data from a CAN bus. If no CAN interface is available, simulated sensor data is used.
-- **Advanced AI Decision-Making:** A TensorFlow model predicts adjustment directions based on real-time sensor input.
-- **Enhanced Front-End Interactivity:** A Flask-based web application with AJAX calls provides a responsive interface to view calibration parameters and send tuning commands.
-- **Calibration Map Persistence:** Engine calibration parameters are stored in a YAML file (`base_map.yaml`) and updated live.
-  
+- **Base Map Loading:** Reads and manages engine calibration maps.
+- **Gradient Tuning:** Slowly adjusts calibration parameters using AI recommendations.
+- **Detuning:** Applies negative gradient increments when parts are degraded.
+- **Active Aero Control:** Manages DRS and braking stability based on dynamic sensor data.
+- **Active Lambda Control:** Continuously adjusts the lambda target to maintain stoichiometric balance.
+- **Modular Design:** Each module is independent and configurable via YAML files.
+
+## Setup
+
+1. Clone the repository.
+2. Install the requirements with:
+   ```bash
+   pip install -r requirements.txt
