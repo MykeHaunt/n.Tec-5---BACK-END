@@ -1,0 +1,4 @@
+# Base calibration map with default parameters
+fuel_map: 1.0
+boost_map: 1.0
+# Additional calibration parameters can be added here
