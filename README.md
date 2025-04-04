@@ -16,4 +16,8 @@ NTec is a modular, AI-driven auto tuning system that combines advanced calibrati
 1. Clone the repository.
 2. Install the requirements with:
    ```bash
-   pip install -r requirements.txt
+   pip install -r requirements.txt```
+3.	Configure your settings in configs/base_map.yaml and configs/tuning_config.yaml.
+4.	Run the system:
+   ```bash
+    python -m src.main```
