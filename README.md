@@ -1,5 +1,3 @@
-Here’s a fully re‑formatted README.md for n.Tec‑5 BACK‑END, ready to drop into your repository root. All Markdown blocks are properly closed, links are corrected, and sections flow cleanly.
-
 # n.Tec‑5 Back‑End
 
 **n.Tec‑5 Back‑End** is the core of the **n.Tec** (Next‑generation Tuning Technology) automotive system—a modular, AI‑driven engine‑tuning and control platform. It combines advanced calibration techniques with real‑time sensor feedback to dynamically optimize engine performance.  
