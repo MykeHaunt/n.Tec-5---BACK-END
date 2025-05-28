@@ -1,57 +1,173 @@
-# n.Tec‑5 Back‑End
+Sure! Here’s the entire n.Tec-5 Back-End Documentation compiled into a single Markdown file:
 
-**n.Tec‑5 Back‑End** is the core of the **n.Tec** (Next‑generation Tuning Technology) automotive system—a modular, AI‑driven engine‑tuning and control platform. It combines advanced calibration techniques with real‑time sensor feedback to dynamically optimize engine performance.  
+⸻
 
----
 
-## Table of Contents
+# n.Tec-5 Back-End Documentation
 
-1. [Overview](#overview)  
-2. [System Architecture](#system-architecture)  
-3. [Technology Stack & Libraries](#technology-stack--libraries)  
-4. [Modules & Components](#modules--components)  
-   - [BaseMap (Calibration Loader)](#basemap-calibration-loader)  
-   - [AI Tuner (Machine Learning)](#ai-tuner-machine-learning)  
-   - [Tuner (Gradient Adjustment)](#tuner-gradient-adjustment)  
-   - [Detuner (Safety Adjustment)](#detuner-safety-adjustment)  
-   - [Aero Controller (Active Aero)](#aero-controller-active-aero)  
-   - [Lambda Controller (AFR Control)](#lambda-controller-afr-control)  
-5. [Configuration Files](#configuration-files)  
-6. [Logging & Monitoring](#logging--monitoring)  
-7. [Setup & Installation](#setup--installation)  
-   - [Development Environment](#development-environment)  
-   - [Production Environment](#production-environment)  
-8. [Docker Containerization](#docker-containerization)  
-9. [PyInstaller Packaging](#pyinstaller-packaging)  
-10. [Continuous Integration (CI/CD)](#continuous-integration-cicd)  
-11. [Usage (CLI)](#usage-cli)  
-12. [Developer Notes](#developer-notes)  
-13. [License](#license)  
+**n.Tec-5** is a modular, AI-driven engine tuning and control platform. It functions like a custom Electronic Control Unit (ECU) that manages engine performance through adaptive calibration updates based on real-time sensor data. Inspired by MoTeC-style systems, this back end forms the brain of the tuning architecture.
 
 ---
 
-## Overview
+## 1. Overview and Goals
 
-n.Tec‑5 Back‑End manages engine calibration data and uses sensor inputs to automatically tune an engine’s performance in real time. Key features:
-
-- **Base Map Loading**: Reads and persists calibration maps from YAML files.  
-- **AI‑Based Gradient Tuning**: Uses neural networks to recommend calibration adjustments.  
-- **Safety Detuning**: Automatically reduces parameters when parts degrade.  
-- **Active Aero Control**: Manages DRS and brake stability flags.  
-- **Lambda Control**: Maintains target air–fuel ratio via closed‑loop adjustments.  
-- **Modular Design**: Each component runs independently and communicates via shared data structures.  
-- **Real‑Time Loop**: Continuously executes: read sensors → tune/detune → persist → update aero & lambda.
+- **Adaptive Engine Calibration**: AI-guided updates to boost/fuel/ignition maps.
+- **Modular Structure**: Independent modules for tuning, detuning, lambda control, and aerodynamics.
+- **Configuration via YAML**: Tuning parameters, thresholds, and targets are externally configurable.
+- **Diagnostics & Logging**: Safe detuning on part degradation, with full traceable logs.
+- **Cross-Platform Deployment**: Runs on PC, Raspberry Pi, or embedded Linux.
 
 ---
 
-## System Architecture
+## 2. Architecture
 
+### Major Modules:
+
+- `BaseMap`: Holds calibration parameters (`fuel_map`, `boost_map`, etc.).
+- `Tuner`: Applies gradient updates (+/-ε) based on AI tuner decisions.
+- `AITuner`: Neural net decision engine; predicts tuning direction (`+1`, `0`, `-1`).
+- `Detuner`: Applies safe detune steps based on part health (e.g. reduce boost if turbo degraded).
+- `ActiveLamdaController`: Adjusts lambda (AFR) setpoint based on sensor feedback.
+- `AeroController`: Controls DRS and brake stability from speed/wheel data.
+
+### Real-Time Data Loop:
+
+1. Collect sensor input
+2. Predict adjustment via `AITuner`
+3. Tune or detune parameters
+4. Update aero and lambda targets
+5. Log state & write back updated map
+
+---
+
+## 3. Real-Time Tuning Algorithms
+
+### Gradient Tuning
+
+```python
+new_val = tuner.apply_gradient_increment("fuel_map", direction=+1)
+
+Detuning
+
+part_status = {'turbocharger': True}
+params = detuner.check_part_degradation(part_status)
+
+AI Tuner
+
+input_vec = [steering, throttle, accel, brake, lambda_err]
+direction = ai_tuner.predict_adjustment(input_vec)
+
+	•	+1 = enrich/increase
+	•	-1 = lean/decrease
+	•	0 = no change
+
+⸻
+
+## 4. Base Map & Lambda Controller
+
+Base Map (YAML example)
+
+fuel_map: 1.0
+boost_map: 1.0
+
+Lambda Control
+
+lamda_ctrl = ActiveLamdaController(target_lambda=1.0, adjustment_step=0.01)
+new_target = lamda_ctrl.update_lambda(current_lambda=1.1)
+
+If AFR too lean → enrich
+If AFR too rich → lean out
+
+⸻
+
+5. Configuration (YAML)
+
+configs/tuning_config.yaml:
+
+gradient_step: 0.01
+detune_gradient_step: 0.01
+lambda_target: 1.0
+lambda_adjustment_step: 0.01
+tolerance: 0.05
+
+Load config:
+
+with open("configs/tuning_config.yaml", 'r') as f:
+    cfg = yaml.safe_load(f)
+
+
+⸻
+
+6. Sensor Input Integration
+
+Simulated Example:
+
+sensor_data = {
+  'steering': 0.5,
+  'throttle': 0.7,
+  'lambda': 1.05,
+  'vehicle_speed': 100.0,
+  'wheel_speeds': [90, 91, 89, 92],
+}
+
+Real Sensor Integration:
+
+Via CAN (e.g. python-can):
+
+msg = can_bus.recv()
+if msg.arbitration_id == SPEED_CAN_ID:
+    sensor_data['vehicle_speed'] = decode_speed(msg.data)
+
+
+⸻
+
+7. Aero Control System
+
+DRS Logic:
+
+drs_active = aero_controller.update_drs(vehicle_speed=100, lap_time=60, race_mode=True)
+
+Brake Stability Logic:
+
+adjustments = aero_controller.update_braking_stability([90, 92, 88, 91])
+
+
+⸻
+
+8. Logging and Output
+
+All modules log decisions and map changes. Example output:
+
+[Tuning] 'fuel_map' adjusted to 1.01
+[Detune] 'boost_map' detuned to 0.95
+[Lambda] target lambda=0.990
+[Aero] DRS=Active, BrakeAdjust=0.97
+
+
+⸻
+
+9. System Integration
+
+n.Tec-5 Back-End can integrate with:
+	•	MoTeC dash or ECU
+	•	Python front-end GUI
+	•	Embedded control loop on vehicle
+	•	Logging servers (via REST/WebSocket)
+
+Back-end operates headless and exposes states via log or API. Designed to be robust for motorsport or simulation environments.
+
+⸻
+
+10. Credits
+
+WORK IN PROGRESS BY: H. Pandit
+Part of the n.Tec-5 Performance AI Tuning Suite.
+
+---
+
+Let me know if you'd like this saved to a file or converted into a `README.md` or GitHub documentation format!
 https://github.com/user-attachments/assets/66abe772-5801-432f-b7e9-d87fa1156551
-
-
-
 https://github.com/user-attachments/assets/2193e625-aed2-4b76-ac46-6499485f27ee
-
 ![IMG_9852](https://github.com/user-attachments/assets/b19d5f80-d837-47be-84a0-4429bd9a4445)
 ![8051C332-E21F-4F94-A04E-0FD21D487EDC](https://github.com/user-attachments/assets/5671ed62-db51-4a1d-82e5-f154ed5c5e07)
 ![IMG_9865](https://github.com/user-attachments/assets/665bc732-c130-48fc-b32f-2cb3bc3fca82)
