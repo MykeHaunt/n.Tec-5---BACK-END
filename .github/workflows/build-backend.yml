@@ -1,0 +1,75 @@
+name: Build n.Tec5 Back‑End App
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  windows:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with: python-version: '3.10'
+      - run: |
+          pip install --upgrade pip
+          pip install pyinstaller -r requirements.txt
+      - run: pyinstaller backend.spec
+      - uses: actions/upload-artifact@v3
+        with:
+          name: backend-windows
+          path: dist/ntec5-backend/ntec5-backend.exe
+
+  macos:
+    runs-on: macos-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with: python-version: '3.10'
+      - run: |
+          pip install --upgrade pip
+          pip install pyinstaller -r requirements.txt
+      - run: pyinstaller backend.spec
+      - uses: actions/upload-artifact@v3
+        with:
+          name: backend-macos
+          path: dist/ntec5-backend/ntec5-backend
+
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with: python-version: '3.10'
+      - run: |
+          sudo apt-get update && sudo apt-get install -y libglib2.0-0 libsm6 libxrender1 libxext6
+          pip install --upgrade pip
+          pip install pyinstaller -r requirements.txt
+      - run: pyinstaller backend.spec
+      - uses: actions/upload-artifact@v3
+        with:
+          name: backend-linux
+          path: dist/ntec5-backend/ntec5-backend
+
+  # Optional: add an ARM64 job for Raspberry Pi:
+  raspberry-pi:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: docker/setup-qemu-action@v2
+      - uses: docker/setup-buildx-action@v2
+      - run: |
+          cat > Dockerfile.arm << 'EOF'
+          FROM --platform=linux/arm64 python:3.10-slim
+          RUN apt-get update && apt-get install -y build-essential libglib2.0-0 libsm6 libxrender1 libxext6 && rm -rf /var/lib/apt/lists/*
+          WORKDIR /src
+          COPY . .
+          RUN pip install pyinstaller -r requirements.txt
+          RUN pyinstaller backend.spec
+          EOF
+      - run: docker buildx build --platform linux/arm64 -f Dockerfile.arm --output type=local,dest=dist-arm64 .
+      - uses: actions/upload-artifact@v3
+        with:
+          name: backend-raspberry-pi
+          path: dist-arm64/ntec5-backend
