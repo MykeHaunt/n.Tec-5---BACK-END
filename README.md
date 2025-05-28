@@ -46,17 +46,21 @@ n.Tec‑5 Back‑End manages engine calibration data and uses sensor inputs to a
 
 ## System Architecture
 
-```text
-         [ Sensor Inputs ]
-                │
-         ┌──────┴──────┐
-         │             │
-         │ [ AI Tuner ] ──▶ [ Tuner ] ──▶ Update BaseMap
-         │             │
-         │ [ Detuner ] ─┘
-         │
-         │ [ Aero Ctrl ]    [ Lambda Ctrl ]
-         └────────────┴────────────┘
+    [ Sensor Inputs ]
+           |
+    +------+-------+
+    |              |
+[ AI Tuner ]    [ Detuner ]
+    |              |
+    +-------+------+
+            |
+         [ Tuner ]
+            |
+    +-------+--------+
+    |                |
+[Aero Controller] [Lambda Controller]
+            |
+      Update BaseMap
 
 1. **Sensor Inputs**: Simulated or live (CAN, files, etc.)  
 2. **AI Tuner**: Predicts +1/0/–1 adjustment for calibration keys  
