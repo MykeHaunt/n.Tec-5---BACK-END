@@ -1,8 +1,10 @@
-![Build](https://github.com/MykeHaunt/2JZ-GTE-Predictive-Monitoring-System/actions/workflows/conda-package.yml/badge.svg)
-![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
-![License](https://img.shields.io/github/license/MykeHaunt/2JZ-GTE-Predictive-Monitoring-System)
-![Status](https://img.shields.io/badge/status-WIP-yellow)
-![PyPI](https://img.shields.io/pypi/v/2jz-monitoring)
+# n.Tec-5---BACK-END
+
+![Build](https://github.com/MykeHaunt/n.Tec-5---BACK-END/actions/workflows/conda-package.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
+![License](https://img.shields.io/github/license/MykeHaunt/n.Tec-5---BACK-END)
+![Status](https://img.shields.io/badge/status-Beta-blue.svg)
+![Release](https://img.shields.io/github/v/release/MykeHaunt/n.Tec-5---BACK-END)
 
 > **WORK IN PROGRESS BY: H. Pandit**
 
