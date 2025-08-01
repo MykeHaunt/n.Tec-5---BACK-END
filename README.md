@@ -1,3 +1,11 @@
+![Build](https://github.com/MykeHaunt/2JZ-GTE-Predictive-Monitoring-System/actions/workflows/conda-package.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.10+-blue.svg)
+![License](https://img.shields.io/github/license/MykeHaunt/2JZ-GTE-Predictive-Monitoring-System)
+![Status](https://img.shields.io/badge/status-WIP-yellow)
+![PyPI](https://img.shields.io/pypi/v/2jz-monitoring)
+
+> **WORK IN PROGRESS BY: H. Pandit**
+
 # n.Tec-5 Back-End Documentation
 
 **n.Tec-5** is a modular, AI-driven engine tuning and control platform. It functions like a custom Electronic Control Unit (ECU) that manages engine performance through adaptive calibration updates based on real-time sensor data. Inspired by MoTeC-style systems, this back end forms the brain of the tuning architecture.
