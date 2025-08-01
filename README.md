@@ -1,6 +1,5 @@
 # n.Tec-5---BACK-END
 
-![Build](https://github.com/MykeHaunt/n.Tec-5---BACK-END/actions/workflows/conda-package.yml/badge.svg)
 ![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
 ![License](https://img.shields.io/github/license/MykeHaunt/n.Tec-5---BACK-END)
 ![Status](https://img.shields.io/badge/status-Beta-blue.svg)
