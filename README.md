@@ -1,10 +1,14 @@
-# n.Tec-5---BACK-END
+# n.Tec‑5 — BACK‑END
 
-![Python](https://img.shields.io/badge/python-3.10%2B-blue.svg)
+![Build](https://github.com/MykeHaunt/n.Tec-5---BACK-END/actions/workflows/conda-package.yml/badge.svg)
+![Python](https://img.shields.io/badge/python-3.7%2B-blue.svg)
 ![License](https://img.shields.io/github/license/MykeHaunt/n.Tec-5---BACK-END)
 ![Status](https://img.shields.io/badge/status-Beta-blue.svg)
-![Release](https://img.shields.io/github/v/release/MykeHaunt/n.Tec-5---BACK-END)
-
+![Last Commit](https://img.shields.io/github/last-commit/MykeHaunt/n.Tec-5---BACK-END)
+![Contributors](https://img.shields.io/github/contributors/MykeHaunt/n.Tec-5---BACK-END)
+![Issues](https://img.shields.io/github/issues/MykeHaunt/n.Tec-5---BACK-END)
+![Stars](https://img.shields.io/github/stars/MykeHaunt/n.Tec-5---BACK-END?style=social)
+![Forks](https://img.shields.io/github/forks/MykeHaunt/n.Tec-5---BACK-END?style=social)
 > **WORK IN PROGRESS BY: H. Pandit**
 
 # n.Tec-5 Back-End Documentation
